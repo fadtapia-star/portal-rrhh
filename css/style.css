@@ -1,0 +1,252 @@
+/* ==========================================
+   1. VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================================== */
+:root {
+    --color-primario: #0284c7; /* Azul corporativo */
+    --color-primario-oscuro: #0369a1;
+    --color-texto: #1e293b;
+    --color-texto-claro: #64748b;
+    --color-fondo: #f8fafc;
+    --color-blanco: #ffffff;
+    --color-borde: #cbd5e1;
+    --sombra: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --radio: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ==========================================
+   2. ENCABEZADO Y MENÚ NAVEGABLE (RESPONSIVE)
+   ========================================== */
+.encabezado {
+    background-color: var(--color-blanco);
+    border-bottom: 1px solid var(--color-borde);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--color-texto);
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--color-primario);
+}
+
+.navegacion {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navegacion a {
+    color: var(--color-texto-claro);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.navegacion a:hover,
+.navegacion a.activo {
+    color: var(--color-primario);
+}
+
+.btn-menu {
+    display: none; /* Oculto en escritorio */
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    cursor: pointer;
+    color: var(--color-texto);
+}
+
+/* ==========================================
+   3. SECCIONES Y PANELES
+   ========================================== */
+.seccion {
+    display: none; /* Las secciones se ocultan por defecto; app.js muestra la activa */
+    padding: 3rem 0;
+}
+
+.seccion.activa {
+    display: block;
+}
+
+.titulo-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+}
+
+.etiqueta {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-primario);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+}
+
+.panel {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio);
+    padding: 2rem;
+    box-shadow: var(--sombra);
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   4. GRILLA DE TARJETAS (3 Columnas a 1 en Celular)
+   ========================================== */
+.grid-noticias {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas por defecto */
+    gap: 1.5rem;
+}
+
+.noticia, .tarjeta-departamento {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 1.5rem;
+    box-shadow: var(--sombra);
+    transition: transform 0.2s;
+}
+
+.noticia:hover, .tarjeta-departamento:hover {
+    transform: translateY(-3px);
+}
+
+/* ==========================================
+   5. BOTONES, FORMULARIOS Y TABLAS
+   ========================================== */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radio);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.btn-principal {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.btn-principal:hover {
+    background-color: var(--color-primario-oscuro);
+}
+
+.campo {
+    margin-bottom: 1.25rem;
+}
+
+.campo label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5srem;
+    font-size: 0.875rem;
+}
+
+.campo input, .campo select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    font-size: 1rem;
+}
+
+.tabla-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+th {
+    background-color: var(--color-fondo);
+    font-weight: 600;
+}
+
+.resultado {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--color-fondo);
+    border-radius: var(--radio);
+    border-left: 4px solid var(--color-primario);
+    font-weight: 500;
+}
+
+/* ==========================================
+   6. DISEÑO RESPONSIVE (MEDIA QUERIES PARA CELULAR)
+   ========================================== */
+@media (max-width: 768px) {
+    /* Cambiar la grilla de 3 columnas a 1 sola columna en dispositivos móviles */
+    .grid-noticias {
+        grid-template-columns: 1fr;
+    }
+
+    /* Mostrar botón de menú hamburguesa */
+    .btn-menu {
+        display: block;
+    }
+
+    /* Ocultar el menú de navegación por defecto en celular */
+    .navegacion {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-blanco);
+        flex-direction: column;
+        padding: 1.5rem;
+        box-shadow: var(--sombra);
+        border-bottom: 1px solid var(--color-borde);
+    }
+
+    /* Clase que activará JavaScript para mostrar el menú cuando se presione el botón ☰ */
+    .navegacion.visible {
+        display: flex;
+    }
+}

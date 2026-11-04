@@ -1,0 +1,34 @@
+CONEXIÓN DE "NOTICIAS DEL CURSO" CON ORACLE XE (ESQUEMA HR)
+============================================================
+
+¿Por qué un servidor?
+  El navegador no puede conectarse directamente a Oracle. Este servidor
+  Node.js hace de puente:  Página (fetch)  ->  server.js  ->  Oracle XE (hr)
+
+Requisitos
+  - Oracle XE encendido (la conexión "hr" funciona en SQL Developer).
+  - Node.js instalado (https://nodejs.org, versión LTS).
+    No se necesita Oracle Instant Client: oracledb usa el modo "Thin".
+
+Pasos
+  1. Abrir servidor\config.js y escribir la contraseña del usuario HR.
+  2. Abrir una terminal (CMD / PowerShell / terminal de VS Code) en esta carpeta "servidor".
+  3. Ejecutar una sola vez:   npm install
+  4. Iniciar el servidor:     npm start
+     Debe aparecer: "Conectado a Oracle XE: localhost:1521/xepdb1 usuario hr"
+  5. Abrir en el navegador:   http://localhost:3000
+  6. Ir al menú "Base de datos HR".
+
+Rutas del servidor (se pueden probar en el navegador)
+  http://localhost:3000/api/hr/estado
+  http://localhost:3000/api/hr/resumen
+  http://localhost:3000/api/hr/departamentos
+  http://localhost:3000/api/hr/empleados?departamento=90&buscar=king
+  http://localhost:3000/api/hr/tabla/EMPLOYEES
+
+Errores frecuentes
+  ORA-01017  -> usuario o contraseña incorrectos (revisar config.js).
+  ORA-28000  -> cuenta HR bloqueada. Como SYSTEM en xepdb1:
+                ALTER USER hr ACCOUNT UNLOCK IDENTIFIED BY nueva_clave;
+  ORA-12514 / NJS-503 -> Oracle apagado o servicio incorrecto (debe ser xepdb1).
+  "No responde el servidor" en la página -> falta ejecutar npm start.
